@@ -1,0 +1,10 @@
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\MyLexicalAnalysis.MainForm.resources
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\MyLexicalAnalysis.MyRichTextBox.resources
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\bin\Debug\MyCompilation.exe
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\bin\Debug\MyCompilation.pdb
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\MyCompilation.Properties.Resources.resources
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\MyCompilation.exe
+D:\VSWORKSPACE1\Compilation\MyLexicalAnalysis\MyLexicalAnalysis\obj\x86\Debug\MyCompilation.pdb

@@ -1,0 +1,96 @@
+#程序主体 
+program -> external_declaration program'
+program' -> external_declaration program' @ $
+#外部声明
+external_declaration -> function_definition #BUILD("["],function_definition.name,"Fun_END","]")#
+#函数声明     
+function_definition -> type_specifier #function_definition.name=type_specifier.type# pointer declarator_for_fun #function_definition.name=declarator_for_fun.name;function_definition.params=declarator_for_fun.params;declareFunction(function_definition)# compound_statement
+#类型指定 
+type_specifier -> void #type_specifier.type="void"# @ char #type_specifier.type="char"# @ int #type_specifier.type="int"# @ float #type_specifier.type="float"#
+#变量声明 
+declarator_for_fun -> IDENTIFIER #declarator_for_fun.name=IDENTIFIER.name# ( declarator_for_fun' #declarator_for_fun.params=declarator_for_fun'.params#
+declarator_for_fun' -> ) @ parameter_list ) #declarator_for_fun'.params=parameter_list.params#
+#指针声明 
+pointer -> * @ $
+#声明主体 
+declarator -> IDENTIFIER #declaration.name=IDENTIFIER.name# declarator'
+declarator' -> [ CONST_INT ] #declarator.name="*";declarator.name=CONST_INT.name# declarator' @ $
+#标识符列表
+#identifier_list -> IDENTIFIER identifier_list'
+#identifier_list' -> , IDENTIFIER identifier_list' @ $ 
+#参数列表 
+parameter_list -> parameter_declaration #parameter_list'.params=parameter_declaration.params# parameter_list'
+parameter_list' -> , parameter_declaration #parameter_list'.params=parameter_declaration.params# parameter_list' @ $
+#参数声明单元
+parameter_declaration -> type_specifier #parameter_declaration.params="#";parameter_declaration.params=type_specifier.type;parameter_declaration.params=":"# IDENTIFIER  n.params=IDENTIFIER.name#
+#函数主体声明 
+compound_statement -> { compound_statement'
+compound_statement' -> } @ statement_list } @ declaration_list statement_list }
+#声明列表 
+declaration_list -> declaration declaration_list'
+declaration_list' -> declaration declaration_list' @ $
+declaration -> type_specifier #declaration.type=type_specifier.type# pointer init_declarator #declaration.name=init_declaration.name# declaration' #declareVar(declaration)#
+declaration' -> , init_declarator declaration' @ $
+#变量初次声明 
+init_declarator -> declarator #init_declarator.name=declarator.name# init_declarator'
+init_declarator' -> $ @ = initializer
+#变量初始化
+initializer -> assigment_expression @ { const_expression_list }
+#赋值
+assigment_expression -> IDENTIFIER assigment_expression'' @ const_expression assigment_expression'
+assigment_expression'' -> assigment_expression' @ = logical_or_expression
+assigment_expression' -> > logical_or_expression @ < logical_or_expression @ >= logical_or_expression @ <= logical_or_expression @ == logical_or_expression @ != logical_or_expression @ && logical_or_expression @ || logical_or_expression @ + logical_or_expression @ - logical_or_expression @ / logical_or_expression @ * logical_or_expression @ % logical_or_expression @ $
+#逻辑或表达式
+logical_or_expression -> logical_and_expression logical_or_expression'
+logical_or_expression' -> || logical_and_expression logical_or_expression' @ $
+#逻辑和表达式
+logical_and_expression -> equality_expression logical_and_expression'
+logical_and_expression' -> && equality_expression logical_and_expression' @ $
+#语句列表
+statement_list -> statement statement_list'
+statement_list' -> statement statement_list' @ $
+#语句 
+statement -> compound_statement @ expression_statement @ selection_statement @ iteration_statement @ jump_statement @ declaration_list
+#普通语句 
+expression_statement -> ; @ expression ;
+#if else 结构 
+selection_statement -> if ( expression ) statement selection_statement'
+selection_statement' -> $ @ else statement
+#循环结构 
+iteration_statement -> while ( expression ) statement @ for ( expression_statement expression_statement expression ) statement
+#跳转语句 
+jump_statement -> continue ; @ break ; @ return ; @ return expression ;
+#表达式 
+expression -> assigment_expression expression'
+expression' -> , assigment_expression expression' @ $
+#等号相关
+equality_expression -> relational_expression equality_expression'
+equality_expression' -> == relational_expression equality_expression' @ $
+equality_expression' -> != relational_expression equality_expression' @ $
+#比较
+relational_expression -> shift_expression relational_expression'
+relational_expression' -> > shift_expression relational_expression' @ $
+relational_expression' -> < shift_expression relational_expression' @ $
+relational_expression' -> >= shift_expression relational_expression' @ $
+relational_expression' -> <= shift_expression relational_expression' @ $
+#
+shift_expression -> multiplicative_expression shift_expression'
+shift_expression' -> + multiplicative_expression shift_expression' @ $
+shift_expression' -> - multiplicative_expression shift_expression' @ $
+#
+multiplicative_expression -> cast_expression multiplicative_expression'
+multiplicative_expression' -> % cast_expression multiplicative_expression' @ $
+multiplicative_expression' -> / cast_expression multiplicative_expression' @ $
+multiplicative_expression' -> * cast_expression multiplicative_expression' @ $
+#
+cast_expression -> postfix_expression
+#
+postfix_expression -> primary_expression postfix_expression'
+postfix_expression' -> [ expression ] postfix_expression' @ $
+postfix_expression' -> ( const_expression_list )
+#
+primary_expression -> IDENTIFIER @ const_expression @ ( expression )
+const_expression -> CONST_INT #const_expression.name=CONST_INT.name# @ CONST_FLOAT #const_expression.name=CONST_FLOAT.name# @ CONST_CHAR #const_expression.name=CONST_CHAR.name# @ CONST_STRING #const_expression.name=CONST_STRING.name#
+#
+const_expression_list -> const_expression const_expression_list'
+const_expression_list' -> , const_expression const_expression_list' @ $
