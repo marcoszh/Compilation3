@@ -61,7 +61,7 @@ namespace MyCompilation
         }
     }
 
-    class Sementics
+    class Semantics
     {
         static int lcount = 1;
         static int selfcount = 1;

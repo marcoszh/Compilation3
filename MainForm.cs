@@ -15,7 +15,7 @@ namespace MyCompilation
         CLexicalAnalysis myLexicalAnalysis = new CLexicalAnalysis();
         CParsing mParsing = new CParsing();
         STableForm stForm = new STableForm();
-        //Sementics mSementics = new Sementics();
+        //Semantics mSementics = new Semantics();
         public MainForm()
         {
             InitializeComponent();
@@ -251,11 +251,11 @@ namespace MyCompilation
 
             foreach (Token t in myLexicalAnalysis.sementicsTokens)
             {
-                Sementics.tokenlist.Add(new Token(Sementics.tokenlist.Count, t.val, t.type));
+                Semantics.tokenlist.Add(new Token(Semantics.tokenlist.Count, t.val, t.type));
             }
-            Sementics.tokenlist.Add(new Token(Sementics.tokenlist.Count, "#", "#"));
-            Sementics.GetSegment(Sementics.tokenlist);
-            Sementics.S(Sementics.tokenlist);
+            Semantics.tokenlist.Add(new Token(Semantics.tokenlist.Count, "#", "#"));
+            Semantics.GetSegment(Semantics.tokenlist);
+            Semantics.S(Semantics.tokenlist);
             showSF();
 
 
@@ -272,16 +272,16 @@ namespace MyCompilation
 
         public void showSF()
         {
-            SementicsForm sf = new SementicsForm();
-            foreach (string r in Sementics.tresult)
+            SemanticsForm sf = new SemanticsForm();
+            foreach (string r in Semantics.tresult)
             {
                 sf.AppendSym(r + "\n");
             }
-            foreach(string r in Sementics.rresult)
+            foreach(string r in Semantics.rresult)
             {
                 sf.Append3AC(r + "\n");
             }
-            foreach (string r in Sementics.eresult)
+            foreach (string r in Semantics.eresult)
             {
                 sf.AppendErr(r + "\n");
             }

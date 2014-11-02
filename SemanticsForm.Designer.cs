@@ -1,6 +1,6 @@
 ﻿namespace MyCompilation
 {
-    partial class SementicsForm
+    partial class SemanticsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,6 +40,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 37);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(230, 290);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
@@ -48,6 +49,7 @@
             // 
             this.richTextBox2.Location = new System.Drawing.Point(268, 37);
             this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ReadOnly = true;
             this.richTextBox2.Size = new System.Drawing.Size(218, 290);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
@@ -56,7 +58,8 @@
             // 
             this.richTextBox3.Location = new System.Drawing.Point(513, 37);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(238, 290);
+            this.richTextBox3.ReadOnly = true;
+            this.richTextBox3.Size = new System.Drawing.Size(335, 290);
             this.richTextBox3.TabIndex = 2;
             this.richTextBox3.Text = "";
             // 
@@ -87,19 +90,19 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Symbol list";
             // 
-            // SementicsForm
+            // SemanticsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 339);
+            this.ClientSize = new System.Drawing.Size(860, 339);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
-            this.Name = "SementicsForm";
-            this.Text = "SementicsForm";
+            this.Name = "SemanticsForm";
+            this.Text = "SemanticsForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

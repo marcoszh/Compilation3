@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace MyCompilation
 {
-    public partial class SementicsForm : Form
+    public partial class SemanticsForm : Form
     {
-        public SementicsForm()
+        public SemanticsForm()
         {
             InitializeComponent();
             this.richTextBox1.Text = "";
