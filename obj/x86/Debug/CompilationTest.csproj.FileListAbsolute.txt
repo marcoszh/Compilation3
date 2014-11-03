@@ -37,9 +37,9 @@ G:\github\Compilation3\obj\x86\Debug\CompilationTest.csprojResolveAssemblyRefere
 G:\github\Compilation3\obj\x86\Debug\MyCompilation.MainForm.resources
 G:\github\Compilation3\obj\x86\Debug\MyCompilation.LabeledRichTextBox.resources
 G:\github\Compilation3\obj\x86\Debug\MyCompilation.Properties.Resources.resources
-G:\github\Compilation3\obj\x86\Debug\MyCompilation.SementicsForm.resources
 G:\github\Compilation3\obj\x86\Debug\MyCompilation.SResult.resources
 G:\github\Compilation3\obj\x86\Debug\MyCompilation.STableForm.resources
 G:\github\Compilation3\obj\x86\Debug\CompilationTest.csproj.GenerateResource.Cache
 G:\github\Compilation3\bin\Debug\WindowsApplication.exe
 G:\github\Compilation3\bin\Debug\WindowsApplication.pdb
+G:\github\Compilation3\obj\x86\Debug\MyCompilation.SemanticsForm.resources

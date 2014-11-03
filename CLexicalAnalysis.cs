@@ -329,7 +329,7 @@ namespace MyCompilation
                     else
                     {
                         index--;
-                        sementicsTokens.Add(new Token(z++,charTemp.ToString(),charTemp.ToString()));
+                        sementicsTokens.Add(new Token(z++, temp, temp));
                     }
 
                     //将运算符元素加入到链表中

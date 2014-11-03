@@ -72,11 +72,11 @@
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Properties\Settings.Designer.cs" />
     <Compile Include="Semantics.cs" />
-    <Compile Include="SementicsForm.cs">
+    <Compile Include="SemanticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SementicsForm.Designer.cs">
-      <DependentUpon>SementicsForm.cs</DependentUpon>
+    <Compile Include="SemanticsForm.Designer.cs">
+      <DependentUpon>SemanticsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SResult.cs">
       <SubType>Form</SubType>
@@ -102,8 +102,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SementicsForm.resx">
-      <DependentUpon>SementicsForm.cs</DependentUpon>
+    <EmbeddedResource Include="SemanticsForm.resx">
+      <DependentUpon>SemanticsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SResult.resx">
       <DependentUpon>SResult.cs</DependentUpon>
