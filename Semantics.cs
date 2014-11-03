@@ -5,12 +5,12 @@ using System.Text;
 
 namespace MyCompilation
 {
-    /*语义分析阶段语句块*/
+    //语义分析时使用的段
     struct Segment
     {
-        public int id;
-        public int start;
-        public int end;
+        public int id;  //标号
+        public int start;   //开始索引
+        public int end; //结束索引
         public Segment(int id, int start, int end)
         {
             this.id = id;
@@ -18,12 +18,12 @@ namespace MyCompilation
             this.end = end;
         }
     }
-    /*语义分析输入token*/
+    //语义分析时用的token
     struct Token
     {
-        public int id;
-        public string val;
-        public string type;
+        public int id;  //token的id
+        public string val;  //token的值
+        public string type; //token的类型
         public Token(int id, string val, string type)
         {
             this.id = id;
@@ -31,11 +31,11 @@ namespace MyCompilation
         }
     }
 
-    /*函数符号表*/
+    //函数的数据结构
     struct functable
     {
-        public string type;
-        public string name;
+        public string type; //函数返回值
+        public string name; //函数名
         public functable(string type, string name)
         {
             this.type = type;
@@ -43,14 +43,14 @@ namespace MyCompilation
         }
     }
 
-    /*符号表使用的数据结构*/
+    //符号表中使用的结构
     struct Chartable
     {
-        public string name;
-        public string type;
-        public int offset;
-        public int length;
-        public string funcname;
+        public string name; //符号的类型
+        public string type; //符号的类型
+        public int offset;  //偏移地址
+        public int length;  //分配空间大小
+        public string funcname; //所处的函数作用域
         public Chartable(string name, string type, int offset, int length, string funcname)
         {
             this.name = name;
@@ -61,6 +61,7 @@ namespace MyCompilation
         }
     }
 
+    //进行语义分析的类的封装
     class Semantics
     {
         static int lcount = 1;
@@ -68,10 +69,10 @@ namespace MyCompilation
         static int logicalcount = 1;
         static int j = 0;
         static int offset = 0;//
-        //MY
         static List<Segment> segment = new List<Segment>();
         public static List<Token> tokenlist = new List<Token>();
-        /*int a; if() {} while() int main()分别都算一块，标号L segment.Count + 1；segment.Add(new Segment(segment.Count + 1, start, end));*/
+
+        //将代码分成片段，函数、分支、循环、赋值、声明，便于进行分别处理
         public static void GetSegment(List<Token> tokenlist)
         {
             Stack<Token> stack = new Stack<Token>();
@@ -174,6 +175,8 @@ namespace MyCompilation
             }
             return lstr + " " + spr;
         }
+
+        //返回label字符串
         public static string ShowLS(List<Token> tokenlist, int j)
         {
             string lstr = "";
@@ -200,6 +203,8 @@ namespace MyCompilation
         public static List<string> rresult = new List<string>();
         public static List<Chartable> table = new List<Chartable>();
         public static List<functable> functable = new List<functable>();
+
+        //比对符号表，看是否重复
         public static int findTable(string name, string funcname, List<Chartable> table)
         {
             int i = 0;
@@ -213,6 +218,7 @@ namespace MyCompilation
             }
             return -1;
         }
+        //看函数表，是否重复
         public static int findVarType(string name, string funcname, List<Chartable> table)
         {
             int i = 0;
@@ -236,6 +242,8 @@ namespace MyCompilation
             }
             return 0;
         }
+        
+        //查找函数表
         public static Boolean findFunc(string funcname, List<functable> functable)
         {
             int i = 0;
@@ -253,9 +261,7 @@ namespace MyCompilation
         {
             if (tokenlist[j].type == "IDN")
             {
-                //MY
                 rresult.Add(ShowLS(tokenlist, j));
-                ///////////////////
                 string IDNval = tokenlist[j].val;
                 int rest = findTable(IDNval, funcname, table);
                 if (rest != -1)
@@ -423,25 +429,6 @@ namespace MyCompilation
             if (tokenlist[j].type == "[")
             {
                 j++;
-                /*if (tokenlist[j].type == "IDN")
-                {
-                    string IDNval = tokenlist[j].val;//findtable
-                    int rest = findTable(IDNval,funcname, table);
-                    if (rest == -1)
-                    {
-                        return "undefined var";
-                    }
-                    else
-                    {
-                        j++;
-                        if (tokenlist[j].type == "]")
-                        {
-                            return IDNval;
-                        }
-                        else return "error";
-                    }
-                }
-                else return "error";*/
                 string tval = T(tokenlist, funcname);
                 if (tokenlist[j].type == "]")
                 {
@@ -524,9 +511,7 @@ namespace MyCompilation
                     }
                     if (tokenlist[j].type == ";")
                     {
-                        //MY
                         rresult.Add(ShowL(tokenlist, j));
-                        ///////////////////
                         j++;
                         string resoffset = D(tokenlist, funcname);
                         return resoffset;
@@ -564,6 +549,8 @@ namespace MyCompilation
 
             }
         }
+
+        //判断类型
         public static string TYPE(List<Token> tokenlist)
         {
             if (tokenlist[j].type == "INT")
@@ -684,7 +671,6 @@ namespace MyCompilation
                         rresult.Add("    " + str2 + " true: goto " + GetLId(tokenlist, j + 1));
                         if (!gotoFalse.Equals(""))
                             rresult.Add("    " + str2 + " false: goto " + gotoFalse);
-                        ////////////////////////////
                         j++;
                         if (tokenlist[j].type.Equals("{"))
                         {
@@ -692,10 +678,8 @@ namespace MyCompilation
                             G(tokenlist, funcname);
                             if (tokenlist[j].type.Equals("}"))
                             {
-                                //MY
                                 rresult.Add(ShowL(tokenlist, j));
                                 j++;
-                                ///////////////////
                             }
                         }
                     }
@@ -707,9 +691,7 @@ namespace MyCompilation
         {
             if (tokenlist[j].type.Equals("IF"))
             {
-                //MY
                 rresult.Add(ShowLS(tokenlist, j));
-                ///////////////
                 j++;
                 if (tokenlist[j].type.Equals("("))
                 {
@@ -718,7 +700,6 @@ namespace MyCompilation
                     string logicalval = O(tokenlist, qval1, funcname);
                     if (tokenlist[j].type.Equals(")"))
                     {
-                        //MY
                         string gotoTrue = GetLId(tokenlist, j + 1);
                         int trueEnd = 0;
                         foreach (Segment seg in segment)
@@ -750,12 +731,7 @@ namespace MyCompilation
                             string gotoFalse1 = GetLId(tokenlist, trueEnd + 1);
                             rresult.Add("    " + logicalval + " false: goto " + gotoFalse1);
                         }
-                        //string gotoFalse2 = GetLId(tokenlist, trueEnd + 2);
-                        //if (!gotoFalse1.Equals(""))
-                        //  rresult.Add("    " + logicalval + " false: goto " + gotoFalse1);
-                        //if (!gotoFalse2.Equals(""))
-                        //  rresult.Add("    " + logicalval + " false: goto " + gotoFalse2);
-                        ///////////////////
+
                         j++;
                         if (tokenlist[j].type.Equals("{"))
                         {
@@ -763,9 +739,7 @@ namespace MyCompilation
                             G(tokenlist, funcname);
                             if (tokenlist[j].type.Equals("}"))
                             {
-                                //MY
                                 rresult.Add(ShowL(tokenlist, j));
-                                ///////////////////
                                 j++;
                                 N(tokenlist, funcname);
                             }
@@ -805,14 +779,11 @@ namespace MyCompilation
                 string op = tokenlist[j].type;
                 j++;
                 string qval2 = Q(tokenlist, funcname);
-                //Console.WriteLine(qval1 + op + qval2);
-                //rresult.Add(qval1 + op + qval2);
+             
                 return qval1 + op + qval2;
             }
             else if (tokenlist[j].type == ")")
             {
-                //Console.WriteLine(qval1);
-                //rresult.Add(qval1);
                 return qval1;
             }
             else
@@ -838,12 +809,13 @@ namespace MyCompilation
             else
                 return "error";
         }
+
+        //进行函数语义分析
         public static void FUNC(List<Token> tokenlist)
         {
             string functype = TYPE(tokenlist);
-            //MY
+            //生成三地址码
             rresult.Add(ShowLS(tokenlist, j));
-            ///////////////
             j++;
             if (tokenlist[j].type == "IDN")
             {
@@ -855,6 +827,7 @@ namespace MyCompilation
                 }
                 else
                     functable.Add(new functable(functype, IDNval));
+                //进行参数表分析
                 if (tokenlist[j].type == "(")
                 {
                     j++;

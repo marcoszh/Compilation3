@@ -252,7 +252,7 @@ namespace MyCompilation
             foreach (Token t in myLexicalAnalysis.sementicsTokens)
             {
                 Semantics.tokenlist.Add(new Token(Semantics.tokenlist.Count, t.val, t.type));
-                Console.WriteLine(t.val+" "+t.type);
+                Console.WriteLine(Semantics.tokenlist.Count+" "+t.val + " " + t.type);
             }
             Semantics.tokenlist.Add(new Token(Semantics.tokenlist.Count, "#", "#"));
             Semantics.GetSegment(Semantics.tokenlist);
