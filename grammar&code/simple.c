@@ -2,8 +2,8 @@ int main(int x, float y)
 {
 	int a;
 	int b;
-	float d[5];
-	
+	float d[5][4];
+
 	float a;
 	a=5;
 	k=5;

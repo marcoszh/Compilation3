@@ -155,6 +155,8 @@ namespace MyCompilation
             }
             return "";
         }
+
+        //返回标号语句
         public static string ShowL(List<Token> tokenlist, int j)
         {
             string lstr = "";
@@ -445,6 +447,7 @@ namespace MyCompilation
             }
             else return "error";
         }
+        //声明区代码
         public static string P(List<Token> tokenlist, string funcname)
         {
             if (tokenlist[j].type == "FLOAT" || tokenlist[j].type == "INT" || tokenlist[j].type == "CONST_INT" || tokenlist[j].type == "CONST_FLOAT" || tokenlist[j].type == "IDN")
@@ -484,6 +487,8 @@ namespace MyCompilation
             else
                 return "error";
         }
+
+        //定义变量
         public static string D(List<Token> tokenlist, string funcname)
         {
             string paramtype = tokenlist[j].type;
@@ -533,10 +538,13 @@ namespace MyCompilation
         {
             if (tokenlist[j].type == "INT" || tokenlist[j].type == "FLOAT")
             {
+                //进行函数分析
                 FUNC(tokenlist);
                 S1(tokenlist);
             }
         }
+
+        //不是第一个函数定义，继续调用
         public static void S1(List<Token> tokenlist)
         {
             if (tokenlist[j].type == "INT" || tokenlist[j].type == "FLOAT")
@@ -559,6 +567,8 @@ namespace MyCompilation
                 return "float";
             else return "error";
         }
+
+        //将函数声明时使用的参数加入符号表
         public static void E(List<Token> tokenlist, string funcname)
         {
             if (tokenlist[j].type == ")")
@@ -572,6 +582,7 @@ namespace MyCompilation
                 if (tokenlist[j].type == "IDN")
                 {
                     string IDNval = tokenlist[j].val;
+                    //加入符号表
                     table.Add(new Chartable(IDNval, paramtype, offset, 4, funcname));//string name, string type, int offset, int length
                     tresult.Add(IDNval + "\t" + paramtype + "\t" + offset + "\t" + 4 + "\t" + funcname);
                     offset += 4;
@@ -584,6 +595,8 @@ namespace MyCompilation
                 //error
             }
         }
+
+        //定义参数时不是打头的参数（前面有逗号）
         public static void E1(List<Token> tokenlist, string funcname)
         {
             if (tokenlist[j].type == ")")
