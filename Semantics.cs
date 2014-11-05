@@ -425,6 +425,8 @@ namespace MyCompilation
             else
                 return "error";
         }
+
+        //数组声明
         public static string B(List<Token> tokenlist, string funcname)
         {
             j++;
@@ -457,6 +459,8 @@ namespace MyCompilation
             }
             else return "error";
         }
+
+        //数组声明配合
         public static string C(List<Token> tokenlist, string type, int width)
         {
             if (tokenlist[j].type == ";")
@@ -568,7 +572,7 @@ namespace MyCompilation
             else return "error";
         }
 
-        //将函数声明时使用的参数加入符号表
+        //赋值语句展开
         public static void E(List<Token> tokenlist, string funcname)
         {
             if (tokenlist[j].type == ")")
@@ -596,7 +600,7 @@ namespace MyCompilation
             }
         }
 
-        //定义参数时不是打头的参数（前面有逗号）
+        //赋值语句中使用的E1
         public static void E1(List<Token> tokenlist, string funcname)
         {
             if (tokenlist[j].type == ")")
