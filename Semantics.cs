@@ -660,7 +660,8 @@ namespace MyCompilation
             if (tokenlist[j].type.Equals("WHILE"))
             {
                 //MY
-                rresult.Add(ShowLS(tokenlist, j));
+                string whileL;
+                rresult.Add((whileL=ShowLS(tokenlist, j)));
                 /////////////
                 j++;
                 if (tokenlist[j].type.Equals("("))
@@ -680,7 +681,7 @@ namespace MyCompilation
                                 trueEnd = seg.end;
                             }
                         }
-                        string gotoFalse = GetLId(tokenlist, trueEnd + 2);
+                        string gotoFalse = GetLId(tokenlist, trueEnd + 1);
                         rresult.Add("    " + str2 + " true: goto " + GetLId(tokenlist, j + 1));
                         if (!gotoFalse.Equals(""))
                             rresult.Add("    " + str2 + " false: goto " + gotoFalse);
@@ -694,6 +695,7 @@ namespace MyCompilation
                                 rresult.Add(ShowL(tokenlist, j));
                                 j++;
                             }
+                            rresult.Add("    " + "goto " + whileL.Split(':')[0]);
                         }
                     }
                 }

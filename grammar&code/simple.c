@@ -7,6 +7,12 @@ int main(int x, float y)
 	float a;
 	a=5;
 	k=5;
+	while( a>b )
+    {
+        a=2;
+    }
+    a=1;
+    b=a;
 	if( a>b && b<0 )
 		{
 		 a=b+1;
